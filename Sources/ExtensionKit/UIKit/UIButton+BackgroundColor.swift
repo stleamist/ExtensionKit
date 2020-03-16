@@ -1,5 +1,6 @@
 //
 //  UIButton+BackgroundColor.swift
+//  A UIButton extension to set the color of its background, supporting dynamic colors introduced in iOS 13.
 //
 //  Created by Dongkyu Kim on 2019/01/15.
 //  Copyright © 2019 Dongkyu Kim. All rights reserved.
@@ -17,25 +18,33 @@ public extension UIButton {
     /// - Author: [Dongkyu Kim](https://gist.github.com/stleamist)
     /// - Parameters:
     ///     - color: The color of the background to use for the specified state
+    ///     - cornerRadius: The radius, in points, for the rounded corners on the button. The default value is 8.0.
     ///     - state: The state that uses the specified color. The possible values are described in [UIControl.State](apple-reference-documentation://hs-yI2haNm).
     ///
-    @available(iOS 13.0, *)
-    func setBackgroundColor(_ color: UIColor?, for state: UIControl.State) {
+    func setBackgroundColor(_ color: UIColor?, cornerRadius: CGFloat = 8.0, for state: UIControl.State) {
         
         guard let color = color else {
             self.setBackgroundImage(nil, for: state)
             return
         }
         
-        var backgroundImage = UIGraphicsImageRenderer(size: CGSize(width: 1, height: 1)).image { (context) in
+        let length = 1 + cornerRadius * 2
+        let size = CGSize(width: length, height: length)
+        let rect = CGRect(origin: .zero, size: size)
+        
+        var backgroundImage = UIGraphicsImageRenderer(size: size).image { (context) in
             // Fill the square with the black color for later tinting.
-            UIColor.black.setFill()
-            context.fill(context.format.bounds)
+            color.setFill()
+            UIBezierPath(roundedRect: rect, cornerRadius: cornerRadius).fill()
         }
+        
+        backgroundImage = backgroundImage.resizableImage(withCapInsets: UIEdgeInsets(top: cornerRadius, left: cornerRadius, bottom: cornerRadius, right: cornerRadius))
         
         // Apply the `color` to the `backgroundImage` as a tint color
         // so that the `backgroundImage` can update its color automatically when the currently active traits are changed.
-        backgroundImage = backgroundImage.withTintColor(color, renderingMode: .alwaysOriginal)
+        if #available(iOS 13.0, *) {
+            backgroundImage = backgroundImage.withTintColor(color, renderingMode: .alwaysOriginal)
+        }
         
         self.setBackgroundImage(backgroundImage, for: state)
     }
