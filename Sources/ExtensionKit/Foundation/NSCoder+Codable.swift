@@ -10,7 +10,7 @@ public extension NSCoder {
     }
     
     func encodeCodable(_ value: Codable, forKey key: String) {
-        if let jsonString = try? value.jsonString(options: []) {
+        if let jsonString = try? value.jsonString() {
             self.encode(jsonString, forKey: key)
         }
     }
