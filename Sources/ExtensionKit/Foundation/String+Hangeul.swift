@@ -139,7 +139,7 @@ public extension String {
 
 public extension Array where Element: Equatable {
     
-    @inlinable public func firstRange(of otherElements: [Element]) -> Range<Int>? {
+    @inlinable func firstRange(of otherElements: [Element]) -> Range<Int>? {
         for lowerIndex in 0..<self.count {
             if self[lowerIndex] == otherElements.first {
                 if self[lowerIndex...].starts(with: otherElements) {

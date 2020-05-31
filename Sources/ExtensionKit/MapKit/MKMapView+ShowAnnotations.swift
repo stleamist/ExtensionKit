@@ -1,7 +1,7 @@
 import MapKit
 
 public extension MKMapView {
-    open func showAnnotations(_ annotations: [MKAnnotation], edgePadding insets: UIEdgeInsets, animated: Bool) {
+    func showAnnotations(_ annotations: [MKAnnotation], edgePadding insets: UIEdgeInsets, animated: Bool) {
         let coordinates = annotations.map({ $0.coordinate })
         let mapRect = MKMapRect(thatFits: coordinates)
         
