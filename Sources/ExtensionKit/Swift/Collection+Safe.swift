@@ -1,4 +1,4 @@
-import Foundation
+import Swift
 
 public extension Collection {
     

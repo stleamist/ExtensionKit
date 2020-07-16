@@ -1,4 +1,5 @@
 // Source: https://stackoverflow.com/a/39425959/6663613
+import Swift
 
 public extension Character {
     /// A simple emoji is one scalar and presented to the user as an Emoji
