@@ -1,14 +1,32 @@
 import MapKit
 
+#if canImport(MKMapView)
+
+@available(tvOS 9.2, *)
 public extension MKMapView {
+    
+    #if canImport(UIEdgeInsets)
     func showAnnotations(_ annotations: [MKAnnotation], edgePadding insets: UIEdgeInsets, animated: Bool) {
         let coordinates = annotations.map({ $0.coordinate })
         let mapRect = MKMapRect(thatFits: coordinates)
         
         self.setVisibleMapRect(mapRect, edgePadding: insets, animated: animated)
     }
+    #endif
+    
+    #if canImport(NSEdgeInsets)
+    func showAnnotations(_ annotations: [MKAnnotation], edgePadding insets: NSEdgeInsets, animated: Bool) {
+        let coordinates = annotations.map({ $0.coordinate })
+        let mapRect = MKMapRect(thatFits: coordinates)
+        
+        self.setVisibleMapRect(mapRect, edgePadding: insets, animated: animated)
+    }
+    #endif
 }
 
+#endif
+
+@available(tvOS 9.2, *)
 public extension MKMapRect {
     init(thatFits coordinates: [CLLocationCoordinate2D]) {
         let nwCoordinate = coordinates.reduce(CLLocationCoordinate2D(latitude: .leastNormalMagnitude, longitude: .greatestFiniteMagnitude)) { (result, coordinate) -> CLLocationCoordinate2D in

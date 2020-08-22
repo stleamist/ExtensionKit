@@ -1,5 +1,8 @@
 import MapKit
 
+#if canImport(MKMapView)
+
+@available(macOS 11.0, tvOS 9.2, *)
 public extension MKMapView {
     // mapViewDidFinishLoadingMap() 대신 사용 가능한 알림
     static let didFinishInitialRenderNotification = Notification.Name("MKMapViewDidFinishInitialRenderNotification")
@@ -12,3 +15,5 @@ public extension MKMapView {
         }
     }
 }
+
+#endif

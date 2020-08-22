@@ -52,6 +52,7 @@ public extension String {
         }
     }
 
+    @available(iOS 9.0, macOS 10.11, macCatalyst 13.0, *)
     func fastHangeulDecomposedRange(of searchString: String) -> Range<String.Index>? {
 
         if self.fastDecomposedHangeulString.contains(searchString.fastDecomposedHangeulString) {
