@@ -2,6 +2,11 @@
 
 import PackageDescription
 
+fileprivate var exclude: [String] = []
+#if !canImport(UIKit)
+exclude.append("UIKit")
+#endif
+
 let package = Package(
     name: "ExtensionKit",
     platforms: [.iOS(.v8), .macOS(.v10_10), .tvOS(.v9), .watchOS(.v2)],
@@ -11,15 +16,7 @@ let package = Package(
     targets: [
         .target(
             name: "ExtensionKit",
-            exclude: {
-                var exclude: [String] = []
-                
-                #if !canImport(UIKit)
-                exclude.append("UIKit")
-                #endif
-                
-                return exclude
-            }()
+            exclude: exclude
         )
     ]
 )
