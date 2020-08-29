@@ -20,10 +20,6 @@ let package = Package(
                 
                 return exclude
             }()
-        ),
-        .testTarget(
-            name: "ExtensionKitTests",
-            dependencies: ["ExtensionKit"]
         )
     ]
 )
