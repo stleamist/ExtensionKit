@@ -1,6 +1,6 @@
 # For more information about the environments, see https://github.com/actions/virtual-environments/blob/main/images/macos/macos-10.15-Readme.md
 
-name: Build on Xcode (12 beta)
+name: Build on Xcode (12.0)
 
 on:
   push:
@@ -14,7 +14,7 @@ jobs:
     runs-on: macos-latest
     
     env:
-      custom_developer_dir: /Applications/Xcode_12_beta.app
+      custom_developer_dir: /Applications/Xcode_12.app
     
     strategy:
       matrix:
